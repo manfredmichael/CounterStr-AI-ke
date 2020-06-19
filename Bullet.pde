@@ -3,7 +3,7 @@ class Bullet{
 	PVector p;
 	PVector dir;
 	int gamecode;
-	final float speed = 8;
+	final float speed = 18;
 	Bullet(PVector p, PVector dir,int gamecode, Militan shooter){
 		this.shooter = shooter;
 		this.gamecode = gamecode;
