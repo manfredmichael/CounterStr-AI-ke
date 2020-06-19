@@ -9,7 +9,7 @@ void setup(){
 	t=millis();
 	fullScreen();
 	frameRate(30);
-	for (int i = 0; i < 1; i++){
+	for (int i = 0; i < 2; i++){
 		mils.add(new Gunman(false));
 		mils.add(new Gunman(true));
 	}
@@ -17,7 +17,7 @@ void setup(){
 		mils.add(new Sniper(false));
 		mils.add(new Sniper(true));
 	}
-	for (int i = 0; i < 1; i++){
+	for (int i = 0; i < 7; i++){
 		mils.add(new Militan(false));
 		mils.add(new Militan(true));
 	}
@@ -28,6 +28,7 @@ void draw(){
 	for(Militan mil : mils){
 		mil.takeAction(mils, bullets);
 		mil.limit();
+		mil.scoreMovement();
 	}
 
 	eList.render();

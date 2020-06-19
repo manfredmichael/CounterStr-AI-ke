@@ -28,7 +28,7 @@ public void setup(){
 	t=millis();
 	
 	frameRate(30);
-	for (int i = 0; i < 1; i++){
+	for (int i = 0; i < 2; i++){
 		mils.add(new Gunman(false));
 		mils.add(new Gunman(true));
 	}
@@ -36,7 +36,7 @@ public void setup(){
 		mils.add(new Sniper(false));
 		mils.add(new Sniper(true));
 	}
-	for (int i = 0; i < 1; i++){
+	for (int i = 0; i < 7; i++){
 		mils.add(new Militan(false));
 		mils.add(new Militan(true));
 	}
@@ -47,6 +47,7 @@ public void draw(){
 	for(Militan mil : mils){
 		mil.takeAction(mils, bullets);
 		mil.limit();
+		mil.scoreMovement();
 	}
 
 	eList.render();
@@ -634,7 +635,7 @@ class Militan{
 		}
 	}
 	public void scoreMovement(){
-		if(millis() > survival + 4000){
+		if(millis() > movement + 4000){
 			// score += 0.4*PVector.sub(pPrev, p).mag()/250;
 			if(PVector.sub(pPrev, p).mag() > 200)
 				qt.reward += 2;

@@ -105,7 +105,7 @@ class Militan{
 		}
 	}
 	void scoreMovement(){
-		if(millis() > survival + 4000){
+		if(millis() > movement + 4000){
 			// score += 0.4*PVector.sub(pPrev, p).mag()/250;
 			if(PVector.sub(pPrev, p).mag() > 200)
 				qt.reward += 2;
