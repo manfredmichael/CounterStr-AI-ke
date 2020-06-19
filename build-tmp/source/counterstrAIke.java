@@ -29,13 +29,17 @@ public void setup(){
 	
 	frameRate(30);
 	for (int i = 0; i < 1; i++){
+		mils.add(new Gunman(false));
+		mils.add(new Gunman(true));
+	}
+	for (int i = 0; i < 1; i++){
 		mils.add(new Sniper(false));
 		mils.add(new Sniper(true));
+	}
+	for (int i = 0; i < 1; i++){
 		mils.add(new Militan(false));
 		mils.add(new Militan(true));
 	}
-	// println(degrees(new PVector(1,1).heading() - new PVector(1,-1).heading()));
-	// println(degrees(PVector.angleBetween(new PVector(1,0),new PVector(1,1))));
 }
 public void draw(){
 	background(51);
@@ -1172,12 +1176,15 @@ class Sniper extends Militan{
 	Sniper(boolean team){
 		super(team);
 		reloadTime = 5000;
-		visionAng = PI/5; //Angle of vision limit, the total visible are is 2 times this
-		visionDis = 500;
+		visionAng = PI/7; //Angle of vision limit, the total visible are is 2 times this
+		visionDis = 600;
 		println(super.visionDis);
 	}
 	Sniper(PVector p, boolean team){
 		super(p, team);
+		reloadTime = 5000;
+		visionAng = PI/7; //Angle of vision limit, the total visible are is 2 times this
+		visionDis = 600;
 	}
 	public void show(){
 		//Draw depending on militan's team
@@ -1198,6 +1205,7 @@ class Sniper extends Militan{
 		if(team){
 			fill(0xff555346);
 			rect(size/2, 0,size*2,size/10);
+			rect(size/2 + size, 0,size/3,size/7);
 			rect(size/2, 0,size*5/7,size/8);
 			rect(size/2, 0,size*2/4,size/5);
 			fill(0xff535D4A);
@@ -1205,6 +1213,7 @@ class Sniper extends Militan{
 		} else {
 			fill(0xff746B5A);
 			rect(size/2, 0,size*2,size/10);
+			rect(size/2 + size, 0,size/3,size/7);
 			rect(size/2, 0,size*5/7,size/8);
 			rect(size/2, 0,size*2/4,size/5);
 			fill(0xffB29D69);
@@ -1213,7 +1222,65 @@ class Sniper extends Militan{
 		popMatrix();
 	}
 }
-  public void settings() { 	size(600, 600); }
+class Gunman extends Militan{
+	boolean shooting = false;
+	Gunman(boolean team){
+		super(team);
+		reloadTime = 400;
+		visionAng = PI*3/5; //Angle of vision limit, the total visible are is 2 times this
+		visionDis = 180;
+		println(super.visionDis);
+	}
+	Gunman(PVector p, boolean team){
+		super(p, team);
+		reloadTime = 400;
+		visionAng = PI*3/5; //Angle of vision limit, the total visible are is 2 times this
+		visionDis = 180;
+	}
+	public void show(){
+		//Draw depending on militan's team
+		fill(255);
+		textAlign(CENTER, CENTER);
+		textSize(size / 2);
+		text(name, p.x, p.y - 30);
+
+		pushMatrix();
+		rectMode(CENTER);
+		stroke(0);
+		translate(p.x, p.y);
+		rotate(ang);
+		if(showVision){
+				noFill();
+				arc(0, 0, visionDis * 2, visionDis * 2, -visionAng, visionAng, PIE); //to show visible area
+		}
+		if(team){
+			fill(0xff555346);
+			rect(size/2, 0,size*12/8,size/5);
+			rect(size/2, 0,size*1/4,size/4);
+			fill(0xff535D4A);
+			ellipse(0, 0, size, size);
+		} else {
+			fill(0xff746B5A);
+			rect(size/2, 0,size*12/8,size/5);
+			rect(size/2, 0,size*1/4,size/4);
+			fill(0xffB29D69);
+			ellipse(0, 0, size, size);
+		}
+		popMatrix();
+	}
+	public void shoot(ArrayList<Bullet> bulArray){
+		if(millis() > reload + reloadTime){
+			//add bullet at the tip of the gun
+			PVector shootDir = PVector.fromAngle(ang).setMag(size*8/7); //size*8/7 is the tip of the gun bruh, dont get confused :p
+			bulArray.add(new Bullet(p.copy().add(shootDir), PVector.fromAngle(ang), gamecode, this)); //giving gun tip position, gun direction, gun gamecode(team side), and the shooter object for scoring
+			// score -= 0.1; //do not tolerate random shooter >:(
+			qt.reward -= 1;
+			reload = millis();
+		}
+	}
+}
+
+  public void settings() { 	fullScreen(); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "counterstrAIke" };
     if (passedArgs != null) {

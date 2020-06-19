@@ -7,16 +7,20 @@ EventList eList = new EventList();
 
 void setup(){
 	t=millis();
-	size(600, 600);
+	fullScreen();
 	frameRate(30);
+	for (int i = 0; i < 1; i++){
+		mils.add(new Gunman(false));
+		mils.add(new Gunman(true));
+	}
 	for (int i = 0; i < 1; i++){
 		mils.add(new Sniper(false));
 		mils.add(new Sniper(true));
+	}
+	for (int i = 0; i < 1; i++){
 		mils.add(new Militan(false));
 		mils.add(new Militan(true));
 	}
-	// println(degrees(new PVector(1,1).heading() - new PVector(1,-1).heading()));
-	// println(degrees(PVector.angleBetween(new PVector(1,0),new PVector(1,1))));
 }
 void draw(){
 	background(51);
