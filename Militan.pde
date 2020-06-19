@@ -22,9 +22,9 @@ class Militan{
 
 	//parameter
 	final int size = 25;
-	final int reloadTime = 1000;
-	final float visionAng = PI*3/4; //Angle of vision limit, the total visible are is 2 times this
-	final float visionDis = 300;
+	int reloadTime = 1000;
+	float visionAng = PI*3/4; //Angle of vision limit, the total visible are is 2 times this
+	float visionDis = 300;
 	Militan(PVector p,boolean team){
 		brain = new NeuralNetwork(new int[]{4,6,4});
 		qt = new Qtable();
