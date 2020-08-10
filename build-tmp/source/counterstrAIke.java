@@ -28,7 +28,7 @@ public void setup(){
 	t=millis();
 	
 	frameRate(30);
-	for (int i = 0; i < 2; i++){
+	for (int i = 0; i < 1; i++){
 		mils.add(new Gunman(false));
 		mils.add(new Gunman(true));
 	}
@@ -36,7 +36,7 @@ public void setup(){
 		mils.add(new Sniper(false));
 		mils.add(new Sniper(true));
 	}
-	for (int i = 0; i < 7; i++){
+	for (int i = 0; i < 4; i++){
 		mils.add(new Militan(false));
 		mils.add(new Militan(true));
 	}
@@ -133,7 +133,7 @@ class Qtable{
 	float learning_rate       = 0.4f;
 	final float START_LR      = learning_rate;
 	final float DECAY         = 2000;
-	final float DISCOUNT      = 0.85f;
+	final float DISCOUNT      = 0.999f;
 	int episodeCount          = 0;
 
 	final int tgtAng = 8; //Target angle +1 for no target
@@ -1281,7 +1281,7 @@ class Gunman extends Militan{
 	}
 }
 
-  public void settings() { 	fullScreen(); }
+  public void settings() { 	size(600, 600); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "counterstrAIke" };
     if (passedArgs != null) {

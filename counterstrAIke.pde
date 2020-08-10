@@ -7,9 +7,9 @@ EventList eList = new EventList();
 
 void setup(){
 	t=millis();
-	fullScreen();
+	size(600, 600);
 	frameRate(30);
-	for (int i = 0; i < 2; i++){
+	for (int i = 0; i < 1; i++){
 		mils.add(new Gunman(false));
 		mils.add(new Gunman(true));
 	}
@@ -17,7 +17,7 @@ void setup(){
 		mils.add(new Sniper(false));
 		mils.add(new Sniper(true));
 	}
-	for (int i = 0; i < 7; i++){
+	for (int i = 0; i < 4; i++){
 		mils.add(new Militan(false));
 		mils.add(new Militan(true));
 	}

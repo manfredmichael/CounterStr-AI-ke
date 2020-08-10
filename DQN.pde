@@ -5,7 +5,7 @@ class Qtable{
 	float learning_rate       = 0.4;
 	final float START_LR      = learning_rate;
 	final float DECAY         = 2000;
-	final float DISCOUNT      = 0.85;
+	final float DISCOUNT      = 0.999;
 	int episodeCount          = 0;
 
 	final int tgtAng = 8; //Target angle +1 for no target
